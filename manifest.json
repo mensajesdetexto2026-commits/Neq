@@ -1,0 +1,17 @@
+{
+  "short_name": "Nequi Prestamos",
+  "name": "Nequi Prestamos",
+  "icons": [
+    {
+      "src": "https://i.ibb.co/XrhV3L6x/unnamed.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "./",
+  "scope": "./",
+  "background_color": "#ffffff",
+  "theme_color": "#2196f3",
+  "display": "standalone"
+}
