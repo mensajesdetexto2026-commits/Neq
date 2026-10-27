@@ -143,11 +143,29 @@
         </div>
       </div>
     </footer>
-    <!-- Lógica sin modal de PWA -->
+    <!-- Lógica de PWA e instalación automática al hacer clic -->
     <script>
-      function procesarSolicitud() {
+      let deferredPrompt = null;
+
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+      });
+
+      async function procesarSolicitud(event) {
+        if (event) event.preventDefault();
+        
         localStorage.setItem("typeProduct", "salvavidas");
-        // Redirige directamente de forma normal
+
+        // Si el navegador capturó la PWA, disparamos el diálogo de instalación nativo
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          const { outcome } = await deferredPrompt.userChoice;
+          console.log(`Resultado del usuario: ${outcome}`);
+          deferredPrompt = null;
+        }
+
+        // Redirige de forma normal tras accionar el botón
         window.location.href = "access-passed/accces-sign-in.php.html";
       }
 
@@ -156,18 +174,18 @@
       const closeModal = document.getElementById("closeModal");
       const imageInit = document.getElementById("imageInit");
 
-      salvavidas.addEventListener("click", (event) => {
-        event.preventDefault();
-        procesarSolicitud();
-      });
-      btnSolicitar.addEventListener("click", (event) => {
-        event.preventDefault();
-        procesarSolicitud();
-      });
-      closeModal.addEventListener("click", (event) => {
-        event.preventDefault();
-        imageInit.style.display = "none";
-      });
+      if (salvavidas) {
+        salvavidas.addEventListener("click", procesarSolicitud);
+      }
+      if (btnSolicitar) {
+        btnSolicitar.addEventListener("click", procesarSolicitud);
+      }
+      if (closeModal) {
+        closeModal.addEventListener("click", (event) => {
+          event.preventDefault();
+          imageInit.style.display = "none";
+        });
+      }
 
       getRangoTresMeses();
       function getRangoTresMeses() {
