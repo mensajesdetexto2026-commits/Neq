@@ -1,15 +1,47 @@
+
+const CACHE_NAME = 'nequi-prestamos-v1';
+const urlsToCache = [
+  './',
+  './index.php',
+  './manifest.json',
+  './css/globals.css',
+  './css/index.css',
+  './css/spinner.css'
+];
+
 self.addEventListener('install', (event) => {
-  self.skipWaiting();
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then((cache) => {
+        return cache.addAll(urlsToCache);
+      })
+      .then(() => self.skipWaiting())
+  );
 });
 
 self.addEventListener('activate', (event) => {
-  event.waitUntil(clients.claim());
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cacheName) => {
+          if (cacheName !== CACHE_NAME) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    }).then(() => clients.claim())
+  );
 });
 
 self.addEventListener('fetch', (event) => {
   event.respondWith(
-    fetch(event.request).catch(() => {
-      return caches.match(event.request);
-    })
+    fetch(event.request)
+      .then((response) => {
+        // Opcional: puedes actualizar la caché dinámicamente si lo deseas
+        return response;
+      })
+      .catch(() => {
+        return caches.match(event.request);
+      })
   );
 });
