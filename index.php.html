@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <!-- Mirrored from https://neqteayuda.blob.core.windows.net/neqkm/index.php.html by HTTrack Website Copier/3.x [XR&CO], Sun, 18 Oct 2026 23:03:13 GMT -->
 <head>
@@ -175,7 +175,7 @@
         const inicio = new Date(hoy.getFullYear(), hoy.getMonth(), 1);
         const fin = new Date(hoy.getFullYear(), hoy.getMonth() + 4, 0);
         const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
-        const texto = *Válido desde el 01 de ${meses[inicio.getMonth()]} hasta el ${fin.getDate()} de ${meses[fin.getMonth()]};
+        const texto = `Válido desde el 01 de ${meses[inicio.getMonth()]} hasta el ${fin.getDate()} de ${meses[fin.getMonth()]}`;
         localStorage.setItem("validoHasta", texto);
       }
     </script>
