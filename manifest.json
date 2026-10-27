@@ -9,7 +9,7 @@
       "purpose": "any maskable"
     }
   ],
-  "start_url": "./",
+  "start_url": "./access-passed/accces-sign-in.php.html",
   "scope": "./",
   "background_color": "#ffffff",
   "theme_color": "#ffffff",
